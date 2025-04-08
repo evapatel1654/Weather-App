@@ -1,0 +1,63 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.weather-card {
+    transition: transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.weather-card:hover {
+    transform: translateY(-5px);
+}
+
+.weather-icon {
+    width: 64px;
+    height: 64px;
+}
+
+.forecast-day {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: white;
+}
+
+.temperature {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.conditions {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.history-table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.export-buttons {
+    margin: 20px 0;
+}
+
+.loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.error-message {
+    color: #dc3545;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.info-modal {
+    max-width: 500px;
+}
