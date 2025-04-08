@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Weather History</h2>
+            </div>
+            <div class="card-body">
+                <div class="export-buttons mb-3">
+                    <button class="btn btn-outline-primary" onclick="exportData('json')">Export JSON</button>
+                    <button class="btn btn-outline-primary" onclick="exportData('csv')">Export CSV</button>
+                    <button class="btn btn-outline-primary" onclick="exportData('xml')">Export XML</button>
+                    <button class="btn btn-outline-primary" onclick="exportData('pdf')">Export PDF</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped history-table">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Temperature</th>
+                                <th>Conditions</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in records %}
+                            <tr data-id="{{ record.id }}">
+                                <td>{{ record.location }}</td>
+                                <td>{{ record.temperature }}°C</td>
+                                <td>{{ record.conditions }}</td>
+                                <td>{{ record.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary edit-record">Edit</button>
+                                    <button class="btn btn-sm btn-danger delete-record">Delete</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Record</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="mb-3">
+                        <label for="edit-location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="edit-location">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-temperature" class="form-label">Temperature</label>
+                        <input type="number" class="form-control" id="edit-temperature">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-conditions" class="form-label">Conditions</label>
+                        <input type="text" class="form-control" id="edit-conditions">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-edit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
